@@ -1,5 +1,6 @@
 package Tests;
 
+import Base.BaseTest;
 import com.sun.source.tree.WhileLoopTree;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,16 +12,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
-public class AccountDetailsTest {
-
-    public WebDriver Driver;
-
+public class AccountDetailsTest extends BaseTest {
     @Test
     public void metodaAccountDetails() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver.exe");
-        Driver = new ChromeDriver();
-        Driver.get("https://shop.demoqa.com/");
-        Driver.manage().window().maximize();
 
         WebElement dismissElement = Driver.findElement(By.xpath("//a[@class='woocommerce-store-notice__dismiss-link']"));
         dismissElement.click();

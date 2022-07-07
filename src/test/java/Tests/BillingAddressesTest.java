@@ -1,23 +1,14 @@
 package Tests;
 
+import Base.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class BillingAddressesTest {
-
-    public WebDriver Driver;
-
+public class BillingAddressesTest extends BaseTest {
     @Test
     public void metodaAccountDetails() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Automation\\chromedriver.exe");
-        Driver = new ChromeDriver();
-        Driver.get("https://shop.demoqa.com/");
-        Driver.manage().window().maximize();
 
         WebElement dismissElement = Driver.findElement(By.xpath("//a[@class='woocommerce-store-notice__dismiss-link']"));
         dismissElement.click();
@@ -60,6 +51,7 @@ public class BillingAddressesTest {
         String streetValue="Soimului nr.12";
         String apValue="6";
         String cityValue="Baciu";
+        String stateValue="Cluj";
         String pinValue="456776";
         String phoneValue="0744 555 666";
         String emailValue="patron@yahoo.com";
@@ -76,17 +68,16 @@ public class BillingAddressesTest {
         companyElement.clear();
         companyElement.sendKeys(companyValue);
 
-        JavascriptExecutor js = (JavascriptExecutor) Driver;
-        js.executeScript("window.scrollBy(0,500)", "");
-
-        /*WebElement countryArrowElement=Driver.findElement(By.xpath("//span[@class='select2-selection__arrow']"));
+        WebElement countryArrowElement=Driver.findElement(By.xpath("//span[contains(text(),'region')]"));
+        ((JavascriptExecutor) Driver).executeScript("arguments[0].scrollIntoView(false);", countryArrowElement);
         countryArrowElement.click();
 
-        WebElement countryElement= Driver.findElement(By.cssSelector("span[aria-activedescendant='select2-billing_country-result-myq6-AF']"));
-        countryElement.click();
+        WebElement countryInputElement= Driver.findElement(By.cssSelector(".select2-search__field"));
+        countryInputElement.sendKeys(countryValue);
+        countryInputElement.sendKeys(Keys.ENTER);
 
-        Select drpCountry= new Select(Driver.findElement(By.id("select2-billing_country-container")));
-        drpCountry.selectByVisibleText("Romania");*/
+//        Select drpCountry= new Select(Driver.findElement(By.id("select2-billing_country-container")));
+//        drpCountry.selectByVisibleText("Romania");
 
         WebElement streetElement=Driver.findElement(By.id("billing_address_1"));
         streetElement.clear();
@@ -112,8 +103,8 @@ public class BillingAddressesTest {
         emailElement.clear();
         emailElement.sendKeys(emailValue);
 
-        /*WebElement saveButElemenet= Driver.findElement(By.name("save_address"));
-        saveButElemenet.click();*/
+        WebElement saveButElemenet= Driver.findElement(By.name("save_address"));
+        saveButElemenet.click();
 
 
 
